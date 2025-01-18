@@ -1,0 +1,93 @@
+CREATE DATABASE bookstore;
+
+USE bookstore;
+ 
+CREATE TABLE `books` (
+  `Book_id` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(100) DEFAULT NULL,
+  `ISBN` varchar(100) DEFAULT NULL,
+  `Author` varchar(100) DEFAULT NULL,
+  `Publisher` varchar(100) DEFAULT NULL,
+  `Published_Date` date DEFAULT NULL,
+  `Genre` varchar(100) DEFAULT NULL,
+  `Description` varchar(1000) DEFAULT NULL,
+  `Price` varchar(100) DEFAULT NULL,
+  `Stock_Quantity` bigint(100) DEFAULT NULL,
+  PRIMARY KEY (`Book_id`),
+  UNIQUE KEY `ISBN` (`ISBN`)
+);
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `number` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `messages` varchar(1000) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `number` varchar(12) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `method` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `total_products` varchar(1000) NOT NULL,
+  `total_price` int(11) NOT NULL,
+  `placed_on` varchar(50) NOT NULL,
+  `payment_status` varchar(20) NOT NULL DEFAULT 'pending',
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `price` int(11) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `user_type` varchar(20) NOT NULL DEFAULT 'user',
+  `phoneNumber` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+SELECT * FROM users WHERE email='$email' AND password='$password';
+
+INSERT INTO users (name, email, password, user_type, phoneNumber) VALUES ('$name', '$email', '$cpassword', '$user_type', '$phoneNumber');
+
+DELETE FROM users WHERE id='$delete_id';
+
+SELECT name FROM `products` WHERE name='$name';
+
+INSERT INTO `products`(name,price,image) VALUES ('$name','$price','$image');
+
+SELECT image from `products` WHERE id='$delete_id';
+
+UPDATE `products` SET name='$update_name', price='$update_price' WHERE id='$update_p_id';
+
+SELECT total_price FROM `orders` WHERE payment_status = 'pending';
+
+SELECT total_price FROM `orders` WHERE payment_status = 'completed';
+
+SELECT * FROM `cart` where user_id='$user_id';
+
+INSERT INTO `cart`(user_id,name,price,quantity,image) VALUES ('$user_id','$pro_name','$pro_price','$pro_quantity','$pro_image');
